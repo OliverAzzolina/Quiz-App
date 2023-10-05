@@ -4,7 +4,7 @@ let questions = [
         "answer_1": "Robbie Williams",
         "answer_2": "Lady Gaga",
         "answer_3": "Tim Berners-Lee",
-        "answer_4": "Lady Gaga",
+        "answer_4": "Will Smith",
         "correct_answer": 3,
     },
     {
@@ -81,8 +81,26 @@ let questions = [
     },
 ];
 
-function init(){
-    document.getElementById('ofall').innerHTML = questions.length;
-    
+let currentQuestion = 0;
 
+function init(){
+
+    let question = questions[currentQuestion];
+    document.getElementById('ofall').innerHTML = questions.length;
+    document.getElementById('question').innerHTML = question['question'];
+    document.getElementById('answer_1').innerHTML = question['answer_1'];
+    document.getElementById('answer_2').innerHTML = question['answer_2'];
+    document.getElementById('answer_3').innerHTML = question['answer_3'];
+    document.getElementById('answer_4').innerHTML = question['answer_4'];
+}
+
+function answer(selection){
+    selectionNumber = selection.slice(-1);
+    if(selectionNumber == questions[currentQuestion]['correct_answer']){
+        console.log('Richtig');
+        document.getElementById(selection).classList.add('bg-success');
+    }else{
+        console.log('falsch');
+        document.getElementById(selection).classList.add('bg-danger');
+    }
 }

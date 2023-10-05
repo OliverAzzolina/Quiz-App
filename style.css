@@ -7,7 +7,7 @@
 }
 
 .app_card{
-    width: 50vw;
+    width: 400px;
 }
 
 .navbar{
@@ -19,8 +19,6 @@
 }
 
 .question_card{
-    background-color: rgb(255, 202, 109);
-    border: 1px solid;
     border-radius: 4px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
@@ -34,3 +32,17 @@
 .next_question_btn button{
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
+
+ .question_card:hover{
+    cursor: pointer;
+    background-color: rgba(211, 211, 211, 0.5);
+ }
+
+.bg-success, .bg-danger{
+    color: white !important;
+}
+
+.card{
+    --bs-card-border-color: none !important;
+}
+
