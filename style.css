@@ -1,0 +1,36 @@
+.app_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.app_card{
+    width: 50vw;
+}
+
+.navbar{
+    background-color: lightgray;
+}
+
+.question_container{
+    background-color: lightblue;
+}
+
+.question_card{
+    background-color: rgb(255, 202, 109);
+    border: 1px solid;
+    border-radius: 4px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.next_question_btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.next_question_btn button{
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
