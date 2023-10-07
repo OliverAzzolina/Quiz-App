@@ -17,10 +17,10 @@ let questions = [
     },
     {
         "question": "Womit beginnt ein HTML Dokument?",
-        "answer_1": "<!DOCTYPE html>",
-        "answer_2": "<start html>",
-        "answer_3": "<HTML lets GO!>",
-        "answer_4": "<html>",
+        "answer_1": "!DOCTYPE html",
+        "answer_2": "start html",
+        "answer_3": "HTML lets GO!",
+        "answer_4": "html",
         "correct_answer": 1,
     },
     {
@@ -82,25 +82,57 @@ let questions = [
 ];
 
 let currentQuestion = 0;
+let correctQuestion = 0;
 
 function init(){
 
-    let question = questions[currentQuestion];
-    document.getElementById('ofall').innerHTML = questions.length;
-    document.getElementById('question').innerHTML = question['question'];
-    document.getElementById('answer_1').innerHTML = question['answer_1'];
-    document.getElementById('answer_2').innerHTML = question['answer_2'];
-    document.getElementById('answer_3').innerHTML = question['answer_3'];
-    document.getElementById('answer_4').innerHTML = question['answer_4'];
-}
+    if(currentQuestion >= questions.length){
+        document.getElementById('end-screen-container').style = '';
+        document.getElementById('ofAllEndScreen').innerHTML = questions.length;
+        document.getElementById('play-area').style = 'display: none';
+    }else{
+        let question = questions[currentQuestion];
+        document.getElementById('ofAll').innerHTML = questions.length;
+        document.getElementById('question').innerHTML = question['question'];
+        document.getElementById('answer_1').innerHTML = question['answer_1'];
+        document.getElementById('answer_2').innerHTML = question['answer_2'];
+        document.getElementById('answer_3').innerHTML = question['answer_3'];
+        document.getElementById('answer_4').innerHTML = question['answer_4'];
+    }
+    }
 
 function answer(selection){
+    let question = questions[currentQuestion];
+    let idOfCorrectAnswer = `answer_${question['correct_answer']}`;
+
     selectionNumber = selection.slice(-1);
+
     if(selectionNumber == questions[currentQuestion]['correct_answer']){
-        console.log('Richtig');
         document.getElementById(selection).classList.add('bg-success');
+        document.getElementById('amountCorrectQuestions').innerHTML = correctQuestion++ + 1;
     }else{
-        console.log('falsch');
         document.getElementById(selection).classList.add('bg-danger');
+        document.getElementById(idOfCorrectAnswer).classList.add('bg-success');
     }
+
+    document.getElementById('next_question_btn').disabled = false;
+}
+
+function nextQuestion(){
+    currentQuestion++; //wechselt zur nächsten Frage z.B. von 0 auf 1
+    document.getElementById('next_question_btn').disabled = true;
+    document.getElementById('currentNumber').innerHTML = currentQuestion + 1;
+    resetAnswerButtons();
+    init();
+}
+
+function resetAnswerButtons(){
+    document.getElementById('answer_1').classList.remove('bg-success');
+    document.getElementById('answer_2').classList.remove('bg-success');
+    document.getElementById('answer_3').classList.remove('bg-success');
+    document.getElementById('answer_4').classList.remove('bg-success');
+    document.getElementById('answer_1').classList.remove('bg-danger');
+    document.getElementById('answer_2').classList.remove('bg-danger');
+    document.getElementById('answer_3').classList.remove('bg-danger');
+    document.getElementById('answer_4').classList.remove('bg-danger');
 }
