@@ -1,138 +1,201 @@
 let questions = [
     {
         "question": "Wer hat HTML erfunden?",
-        "answer_1": "Robbie Williams",
-        "answer_2": "Lady Gaga",
-        "answer_3": "Tim Berners-Lee",
-        "answer_4": "Will Smith",
+        "answer-1": "Robbie Williams",
+        "answer-2": "Lady Gaga",
+        "answer-3": "Tim Berners-Lee",
+        "answer-4": "Will Smith",
         "correct_answer": 3,
     },
     {
         "question": "Was bedeutet HTML?",
-        "answer_1": "Hello Text Markup Language",
-        "answer_2": "Hyper Text Markup Language",
-        "answer_3": "Hyper Test Markup Language",
-        "answer_4": "Hyper Text Makeup Language",
+        "answer-1": "Hello Text Markup Language",
+        "answer-2": "Hyper Text Markup Language",
+        "answer-3": "Hyper Test Markup Language",
+        "answer-4": "Hyper Text Makeup Language",
         "correct_answer": 2,
     },
     {
         "question": "Womit beginnt ein HTML Dokument?",
-        "answer_1": "!DOCTYPE html",
-        "answer_2": "start html",
-        "answer_3": "HTML lets GO!",
-        "answer_4": "html",
+        "answer-1": "!DOCTYPE html",
+        "answer-2": "start html",
+        "answer-3": "HTML lets GO!",
+        "answer-4": "html",
         "correct_answer": 1,
     },
     {
-        "question": "Was befindet sich im Tag <img>?",
-        "answer_1": "Video",
-        "answer_2": "Sound",
-        "answer_3": "Text",
-        "answer_4": "Bild",
+        "question": "Was befindet sich im img-Tag?",
+        "answer-1": "Video",
+        "answer-2": "Sound",
+        "answer-3": "Text",
+        "answer-4": "Bild",
         "correct_answer": 4,
     },
     {
         "question": "Was macht oder ist das CSS?",
-        "answer_1": "Server",
-        "answer_2": "Texte",
-        "answer_3": "Styling",
-        "answer_4": "Zahlungen",
+        "answer-1": "Server",
+        "answer-2": "Texte",
+        "answer-3": "Styling",
+        "answer-4": "Zahlungen",
         "correct_answer": 3,
     },
     {
-        "question": "Wofür benötigt man das <script>-Tag?",
-        "answer_1": "JavaScript",
-        "answer_2": "CSS",
-        "answer_3": "HTML",
-        "answer_4": "Bootstrap",
+        "question": "Wofür benötigt man ein script-Tag?",
+        "answer-1": "Einbinden von JavaScript",
+        "answer-2": "Einbinden von CSS",
+        "answer-3": "Einbinden von HTML",
+        "answer-4": "Einbinden von Bootstrap",
         "correct_answer": 1,
     },
     {
         "question": "Wofür steht CSS?",
-        "answer_1": "Creating Styling Sheets",
-        "answer_2": "Computing Sty Sheets",
-        "answer_3": "Cascading Style Sheets",
-        "answer_4": "Color Sheme Sheets",
+        "answer-1": "Creating Styling Sheets",
+        "answer-2": "Computing Sty Sheets",
+        "answer-3": "Cascading Style Sheets",
+        "answer-4": "Color Sheme Sheets",
         "correct_answer": 3,
     },
     {
-        "question": "Wie definiert man eine JavaScript Funktion?",
-        "answer_1": "myFunction()",
-        "answer_2": "function myFunction()",
-        "answer_3": "function=myFunction()",
-        "answer_4": "function:myFunction()",
+        "question": "Wie definiert man eine JavaScript-Funktion?",
+        "answer-1": "myFunction()",
+        "answer-2": "function myFunction()",
+        "answer-3": "function=myFunction()",
+        "answer-4": "function:myFunction()",
         "correct_answer": 2,
     },
     {
         "question": "Wie schreibt man eine IF-Abfrage in JavaScript?",
-        "answer_1": "if(index : 0)",
-        "answer_2": "if(index 0)",
-        "answer_3": "if{index = 0)}",
-        "answer_4": "if(index == 0)",
+        "answer-1": "if(index : 0)",
+        "answer-2": "if(index 0)",
+        "answer-3": "if{index = 0)}",
+        "answer-4": "if(index == 0)",
         "correct_answer": 4,
     },
     {
         "question": "Wie schreibt man eine FOR-Schleife in JavaScript?",
-        "answer_1": "for(i = 0; i < array.length; i++)",
-        "answer_2": "for: i < array.length; i++",
-        "answer_3": "for(i : 0; i < array.length; i+)",
-        "answer_4": "for[i = 0; i++]",
+        "answer-1": "for(i = 0; i < array.length; i++)",
+        "answer-2": "for: i < array.length; i++",
+        "answer-3": "for(i : 0; i < array.length; i+)",
+        "answer-4": "for[i = 0; i++]",
         "correct_answer": 1,
     },
 ];
 
 let currentQuestion = 0;
 let correctQuestion = 0;
+let SOUND_SUCCESS = new Audio('./audio/success.mp3');
+let SOUND_FAIL = new Audio('./audio/fail.mp3');
+let SOUND_WIN = new Audio('./audio/victory.mp3');
+let SOUND_LOOSE = new Audio('./audio/loose.mp3');
 
 function init(){
+    document.getElementById('of-all-end-screen').innerHTML = questions.length;
+    showQuestion();
+}
 
-    if(currentQuestion >= questions.length){
-        document.getElementById('end-screen-container').style = '';
-        document.getElementById('ofAllEndScreen').innerHTML = questions.length;
-        document.getElementById('play-area').style = 'display: none';
+function showQuestion(){
+    if(gamesIsOver()){
+        showEndscreen();
     }else{
-        let question = questions[currentQuestion];
-        document.getElementById('ofAll').innerHTML = questions.length;
-        document.getElementById('question').innerHTML = question['question'];
-        document.getElementById('answer_1').innerHTML = question['answer_1'];
-        document.getElementById('answer_2').innerHTML = question['answer_2'];
-        document.getElementById('answer_3').innerHTML = question['answer_3'];
-        document.getElementById('answer_4').innerHTML = question['answer_4'];
+        updateProgressBar();
+        goToNextQuestion();
     }
+}
+
+function gamesIsOver(){
+    return currentQuestion >= questions.length;
+}
+
+function showEndscreen(){
+    document.getElementById('end-screen-container').style = '';
+    document.getElementById('of-all-end-screen').innerHTML = questions.length;
+    document.getElementById('play-area').style = 'display: none';
+    
+    if(correctQuestion >= questions.length / 2){
+        SOUND_WIN.play();
+        document.getElementById('endscreen-gif').src = './img/trophy.gif';
+        document.getElementById('endscreen-title').innerHTML = `Glückwunsch!`
+    }else{
+        SOUND_LOOSE.play();
+        document.getElementById('endscreen-gif').src = './img/loose.gif';
+        document.getElementById('endscreen-title').innerHTML = `Versuch es noch einmal!`
     }
+}
+
+function goToNextQuestion(){
+    let question = questions[currentQuestion];
+    document.getElementById('of-all').innerHTML = questions.length;
+    document.getElementById('question').innerHTML = question['question'];
+    document.getElementById('answer-1').innerHTML = question['answer-1'];
+    document.getElementById('answer-2').innerHTML = question['answer-2'];
+    document.getElementById('answer-3').innerHTML = question['answer-3'];
+    document.getElementById('answer-4').innerHTML = question['answer-4'];
+}
+
+function updateProgressBar(){
+    let percent = (currentQuestion + 1) / questions.length;
+    percent = percent * 100;
+    document.getElementById('progress-bar').style = `width:${percent}%`;
+    document.getElementById('progress-bar').innerHTML = `${percent}%`;
+}
 
 function answer(selection){
     let question = questions[currentQuestion];
-    let idOfCorrectAnswer = `answer_${question['correct_answer']}`;
+    let idOfCorrectAnswer = `answer-${question['correct_answer']}`;
+    blockOtherAnswers();
+    checkAnswer(idOfCorrectAnswer, selection);
+    document.getElementById('next-question-btn').disabled = false;
+}
 
+function blockOtherAnswers(){
+    document.getElementById('answer-1').parentNode.style = "pointer-events: none";
+    document.getElementById('answer-2').parentNode.style = "pointer-events: none";
+    document.getElementById('answer-3').parentNode.style = "pointer-events: none";
+    document.getElementById('answer-4').parentNode.style = "pointer-events: none";
+}
+
+function checkAnswer(idOfCorrectAnswer, selection){
     selectionNumber = selection.slice(-1);
-
     if(selectionNumber == questions[currentQuestion]['correct_answer']){
         document.getElementById(selection).classList.add('bg-success');
-        document.getElementById('amountCorrectQuestions').innerHTML = correctQuestion++ + 1;
+        document.getElementById('amount-correct-questions').innerHTML = correctQuestion++ + 1;
+        SOUND_SUCCESS.play();
+        
     }else{
         document.getElementById(selection).classList.add('bg-danger');
         document.getElementById(idOfCorrectAnswer).classList.add('bg-success');
+        SOUND_FAIL.play();
     }
-
-    document.getElementById('next_question_btn').disabled = false;
 }
 
 function nextQuestion(){
     currentQuestion++; //wechselt zur nächsten Frage z.B. von 0 auf 1
-    document.getElementById('next_question_btn').disabled = true;
-    document.getElementById('currentNumber').innerHTML = currentQuestion + 1;
+    document.getElementById('next-question-btn').disabled = true;
+    document.getElementById('current-number').innerHTML = currentQuestion + 1;
     resetAnswerButtons();
     init();
 }
 
 function resetAnswerButtons(){
-    document.getElementById('answer_1').classList.remove('bg-success');
-    document.getElementById('answer_2').classList.remove('bg-success');
-    document.getElementById('answer_3').classList.remove('bg-success');
-    document.getElementById('answer_4').classList.remove('bg-success');
-    document.getElementById('answer_1').classList.remove('bg-danger');
-    document.getElementById('answer_2').classList.remove('bg-danger');
-    document.getElementById('answer_3').classList.remove('bg-danger');
-    document.getElementById('answer_4').classList.remove('bg-danger');
+    document.getElementById('answer-1').classList.remove('bg-success');
+    document.getElementById('answer-2').classList.remove('bg-success');
+    document.getElementById('answer-3').classList.remove('bg-success');
+    document.getElementById('answer-4').classList.remove('bg-success');
+    document.getElementById('answer-1').classList.remove('bg-danger');
+    document.getElementById('answer-2').classList.remove('bg-danger');
+    document.getElementById('answer-3').classList.remove('bg-danger');
+    document.getElementById('answer-4').classList.remove('bg-danger');
+    document.getElementById('answer-1').parentNode.style = '';
+    document.getElementById('answer-2').parentNode.style = '';
+    document.getElementById('answer-3').parentNode.style = '';
+    document.getElementById('answer-4').parentNode.style = '';
+}
+
+function restartGame(){
+    currentQuestion = 0;
+    correctQuestion = 0;
+    document.getElementById('end-screen-container').style = 'display: none';
+    document.getElementById('play-area').style = '';
+    document.getElementById('current-number').innerHTML = currentQuestion + 1;
+    init();
 }
