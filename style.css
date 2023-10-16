@@ -7,12 +7,12 @@
 }
 
 h5{
-    color: rgb(100, 181, 232) !important;
+    color: rgb(255, 255, 255) !important;
     margin-bottom: 0 !important;
 }
 
 span{
-    color: rgb(170, 79, 255);
+    color: rgb(255, 255, 255);
 }
 
 .app_card{
@@ -21,7 +21,7 @@ span{
 }
 
 .navbar{
-    background-color: rgb(28,28,28);
+    background-color: rgb(69,69,83);
 }
 
 .navbar-brand{
@@ -29,7 +29,7 @@ span{
 }
 
 .question_container{
-    background-color: rgb(28,28,28);
+    background-color:  rgb(69,69,83);
 }
 
 .question_card{
@@ -99,6 +99,12 @@ span{
     height: 680px;
 }
 
+#play-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
 @media (max-width: 450px) {
     #app-body{
         width: 100%;
@@ -106,7 +112,7 @@ span{
     }
 
     .app_container{
-        background-color:  rgb(28,28,28);
+        background-color:   rgb(69,69,83);
     }
 
     #play-area{
