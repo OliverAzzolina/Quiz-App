@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-<body onload="init()">
+<body>
     <div class="app_container">
       <div id="app-body" class="card app_card">
             <nav class="navbar">
@@ -18,16 +18,25 @@
                 </div>
             </nav>
             <img id="img-head" src="./img/bg.png" alt="">
+            <!-- Startscreen -->
+            <div id="start-screen-container" class="card-body question_container" style="">
+              <span class="text-align-center mb-3 mt-3">
+                <span style="font-size: 24px;">Herzlich Willkommen zum</span><br>
+                <span style="color:  rgb(100, 181, 232);font-size: 24px;"><b>HTML</b><br><b>CSS</b><br><b>JavaScript</b></span><br>
+                <span style="font-size: 24px;">Quiz!<br>Viel Spaß!</span>
+              </span>
+              <button type="button" class="btn btn-warning mb-3" onclick="init()">Quiz starten</button>
+            </div>
             <!-- Endscreen -->
               <div id="end-screen-container" class="card-body question_container" style="display: none;">
-                <h5 id="endscreen-title" class="card-title"></h5>
+                <h5 id="endscreen-title" class="card-title mt-3"></h5>
                 <div><img id="endscreen-gif" src="./img/trophy.gif" alt="" srcset=""></div>
                 <span>Du hast <b id="amount-correct-questions">xxx</b> von <b id="of-all-end-screen">yyy</b> Fragen richtig beantwortet</span>
-                <button type="button" class="btn btn-warning" onclick="restartGame()">Quiz neustarten</button>
+                <button type="button" class="btn btn-warning mb-3" onclick="restartGame()">Quiz neustarten</button>
               </div>
             <!-- Playscreen -->
-        <div id="play-area" class="card-body question_container">
-            <h5 id="question" class="card-title">Frage</h5>
+        <div id="play-area" class="card-body question_container" style="display: none;">
+            <h5 id="question" class="card-title mb-3">Frage</h5>
               <div class="card mb-3" onclick="answer('answer-1')">
                 <div id="answer-1" class="card-body question_card"></div>
               </div>

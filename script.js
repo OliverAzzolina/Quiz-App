@@ -89,6 +89,8 @@ let SOUND_WIN = new Audio('./audio/victory.mp3');
 let SOUND_LOOSE = new Audio('./audio/loose.mp3');
 
 function init(){
+    document.getElementById('start-screen-container').style = 'display: none';
+    document.getElementById('play-area').style = '';
     document.getElementById('of-all-end-screen').innerHTML = questions.length;
     showQuestion();
 }
@@ -114,11 +116,11 @@ function showEndscreen(){
     if(correctQuestion >= questions.length / 2){
         SOUND_WIN.play();
         document.getElementById('endscreen-gif').src = './img/trophy.gif';
-        document.getElementById('endscreen-title').innerHTML = `Glückwunsch!`
+        document.getElementById('endscreen-title').innerHTML = `Glückwunsch!`;
     }else{
         SOUND_LOOSE.play();
         document.getElementById('endscreen-gif').src = './img/loose.gif';
-        document.getElementById('endscreen-title').innerHTML = `Versuch es noch einmal!`
+        document.getElementById('endscreen-title').innerHTML = `Versuch es noch einmal!`;
     }
 }
 
